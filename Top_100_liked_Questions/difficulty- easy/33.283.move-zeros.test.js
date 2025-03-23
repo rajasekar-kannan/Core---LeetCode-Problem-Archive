@@ -22,6 +22,10 @@ const moveZeroes = (nums) => {
       nums[idx] = nums[i];
       nums[i] = i === idx ? nums[i] : 0;
       idx++;
+      console.log(nums);
+    } else {
+      console.log(nums);
+      
     }
   }
   console.log(nums);

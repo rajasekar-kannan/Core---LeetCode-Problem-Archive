@@ -32,26 +32,42 @@ Output: false
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isSymmetric = (root) => {
-  if (!root) return root;
+// var isSymmetric = (root) => {
+//   if (!root) return root;
 
-  let s1 = [root.left];
-  let s2 = [root.right];
+//   let s1 = [root.left];
+//   let s2 = [root.right];
 
-  while (s1.length || s2.length) {
-    let actual = s1.pop();
-    let mirror = s2.pop();
+//   while (s1.length || s2.length) {
+//     let actual = s1.pop();
+//     let mirror = s2.pop();
 
-    if (!actual && !mirror) continue;
-    if (actual.val !== mirror.val) return false;
+//     if (!actual && !mirror) continue;
+//     if (actual.val !== mirror.val) return false;
 
-    s1.push(actual.left);
-    s2.push(mirror.right);
-    s1.push(actual.right);
-    s2.push(mirror.left);
-  }
+//     s1.push(actual.left);
+//     s2.push(mirror.right);
+//     s1.push(actual.right);
+//     s2.push(mirror.left);
+//   }
 
-  return true;
+//   return true;
+// };
+
+const symmetricHelper = (s1, s2) => {
+  if (!s1 && !s2) return true; // both are null → symmetric
+  if (!s1 || !s2) return false; // one is null → not symmetric
+  if (s1.val !== s2.val) return false; // values mismatch → not symmetric
+
+  // check opposite sides recursively
+  return (
+    symmetricHelper(s1.left, s2.right) && symmetricHelper(s1.right, s2.left)
+  );
+};
+
+const isSymmetric = (root) => {
+  if (!root) return true; // an empty tree is symmetric
+  return symmetricHelper(root.left, root.right);
 };
 
 class Node {

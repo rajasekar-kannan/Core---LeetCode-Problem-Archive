@@ -25,10 +25,14 @@ const maxProfit = (prices) => {
 
   for (let i = 1; i < prices.length; i++) {
     const todayPrice = prices[i];
-    const todayProfit = todayPrice - minStockPrice;
 
-    profit = Math.max(profit, todayProfit);
-    if (todayPrice < minStockPrice) minStockPrice = todayPrice;
+    if (todayPrice < minStockPrice) {
+      minStockPrice = todayPrice;
+    } else {
+      const todayProfit = todayPrice - minStockPrice;
+
+      profit = Math.max(profit, todayProfit);
+    }
   }
 
   return profit;
